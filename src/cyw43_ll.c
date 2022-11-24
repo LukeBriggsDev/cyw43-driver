@@ -1996,11 +1996,10 @@ int cyw43_ll_wifi_join(cyw43_ll_t *self_in, size_t ssid_len, const uint8_t *ssid
     uint8_t buf[128];
 
     cyw43_write_iovar_u32(self, "ampdu_ba_wsize", 8, WWD_STA_INTERFACE);
-    return auth_type;
     // Set the wireless security type
     if (auth_type == (uint32_t)-1) {
         // Auto auth type
-        if (key == NULL || key_len == 0) {
+        if (key == MP_ROM_NONE || key_len == 0) {
             // No key given, assume this means open security
             auth_type = 0;
         } else {
